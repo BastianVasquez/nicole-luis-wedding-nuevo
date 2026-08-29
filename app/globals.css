@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fucsia: #E91E63;
+  --rosa-mexicano: #FF4F91;
+  --coral: #FF7043;
+  --mandarina: #FF8A3D;
+  --naranja: #F4511E;
+  --amarillo-dorado: #FFB300;
+  --dorado: #D4A017;
+  --verde-lima: #8BC34A;
+  --verde-hoja: #4F7D3A;
+  --ivory: #FFF9F2;
+}
+
+* { scroll-behavior: smooth; }
+
+html {
+  background: var(--ivory);
+}
+
+body {
+  background-color: var(--ivory);
+  color: #2a2a2a;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Decorative divider */
+.divider-floral {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.divider-floral::before,
+.divider-floral::after {
+  content: '';
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, transparent, var(--dorado));
+}
+.divider-floral::after {
+  background: linear-gradient(90deg, var(--dorado), transparent);
+}
+
+/* Subtle grain texture overlay */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* Section fade-in animation */
+.section-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gold border accent */
+.border-gold {
+  border-color: var(--dorado);
+}
+
+/* Floral utility */
+.floral-accent {
+  color: var(--fucsia);
+  opacity: 0.2;
+}
+
+/* Guest modal scrollbar */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 160, 23, .65) rgba(212, 160, 23, .08);
+}
+.overflow-y-auto::-webkit-scrollbar {
+  width: 7px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(212, 160, 23, .08);
+  border-radius: 999px;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(212, 160, 23, .65);
+  border-radius: 999px;
+}

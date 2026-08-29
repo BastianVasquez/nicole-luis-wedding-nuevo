@@ -1,0 +1,23 @@
+'use client'
+import { useEffect, useRef } from 'react'
+
+export default function SectionWrapper({ children, className = '', id }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible') },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <section id={id} ref={ref} className={`section-animate ${className}`}>
+      {children}
+    </section>
+  )
+}
