@@ -1,12 +1,16 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Nicole & Luis — 09·11·2026',
-  description: 'Con Dios como guía, comenzamos nuestro camino juntos.',
+  title: 'Nicole & Luis — 27 de febrero de 2027',
+  description: 'Te invitamos a celebrar junto a nosotros nuestro matrimonio.',
   openGraph: {
-    title: 'Nicole & Luis — Nuestra Boda',
-    description: 'Con Dios como guía, comenzamos nuestro camino juntos.',
+    title: 'Nicole & Luis — 27 de febrero de 2027',
+    description: 'Te invitamos a celebrar junto a nosotros nuestro matrimonio.',
     type: 'website',
+  },
+  robots: {
+    index: false,
+    follow: false,
   },
 }
 

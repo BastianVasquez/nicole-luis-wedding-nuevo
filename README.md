@@ -1,20 +1,16 @@
 # 💒 Nicole & Luis — Sitio Web de Matrimonio
 
-Landing page de matrimonio construida con **Next.js 14 + Tailwind CSS**.
+Invitación digital de matrimonio construida con **Next.js 14 + Tailwind CSS**.
+Boda: **27 de febrero de 2027**.
 
 ---
 
 ## 🚀 Instalación y uso local
 
 ```bash
-# 1. Instalar dependencias
 npm install
-
-# 2. Correr en desarrollo
 npm run dev
-
-# 3. Abrir en el navegador
-http://localhost:3000
+# Abrir http://localhost:3000
 ```
 
 ---
@@ -24,103 +20,55 @@ http://localhost:3000
 ```
 /
 ├── app/
-│   ├── globals.css       # Estilos globales + fuentes Google
-│   ├── layout.js         # Root layout + metadata SEO
-│   └── page.js           # Página principal (compone secciones)
-├── components/
-│   ├── Hero.js           # Portada con nombres y CTA
-│   ├── MusicPlayer.js    # Botón flotante play/pause
-│   ├── Countdown.js      # Cuenta regresiva en tiempo real
-│   ├── Message.js        # Texto de invitación
-│   ├── PhotoHero.js      # Foto principal novios
-│   ├── Parents.js        # Padres de la novia y novio
-│   ├── Padrinos.js       # Sección padrinos (editable)
-│   ├── TheDay.js         # Fecha, hora y lugar
-│   ├── Itinerary.js      # Timeline del día
-│   ├── DressCode.js      # Código de vestimenta
-│   ├── GiftTable.js      # Mesa de regalos (placeholder)
-│   ├── RSVP.js           # Formulario confirmación
-│   ├── NoKids.js         # Aviso solo adultos
-│   ├── Closing.js        # Cierre + versículo + contacto
-│   └── SectionWrapper.js # HOC animación scroll
+│   ├── page.js                    # Invitación genérica (dominio raíz, sin invitado)
+│   ├── invitacion/[slug]/page.js  # Invitación personalizada por invitado
+│   ├── layout.js
+│   └── globals.css
+├── data/
+│   └── guests.js                  # ⭐ ÚNICO archivo a editar para agregar invitados
+├── components/                    # Todas las secciones de la invitación
+├── google-apps-script/
+│   └── Code.gs                    # Script para recibir RSVP en Google Sheets
 ├── public/
-│   ├── images/           # Fotos (agregar aquí)
-│   └── music/            # Archivo MP3 (agregar aquí)
+│   ├── images/                    # Fotos de los novios
+│   └── familia/                   # Fotos de padres/padrinos
 ```
 
 ---
 
-## ✏️ Placeholders editables
+## 👥 Sistema de invitados por link personalizado
 
-### 🎵 Música
-Coloca el archivo MP3 en:
-```
-/public/music/cancion.mp3
-```
-Ya está referenciado en `MusicPlayer.js`.
+Cada invitado recibe un link único, por ejemplo:
 
-### 📸 Foto de novios
-Coloca la foto en `/public/images/novios.jpg` y edita `PhotoHero.js`:
-```jsx
-// Reemplaza el div placeholder por:
-import Image from 'next/image'
-<Image src="/images/novios.jpg" fill alt="Nicole y Luis" className="object-cover" />
+```
+https://tudominio.com/invitacion/maria-gonzalez
 ```
 
-### 💍 Padrinos
-Edita el array en `components/Padrinos.js`:
-```js
-const padrinos = [
-  { rol: 'Padrino de honor', nombre: 'Nombre Real' },
-  // ...
-]
-```
+Para agregar, editar o quitar invitados, **solo edita `data/guests.js`**.
+Los cupos se calculan automáticamente según la cantidad de nombres — no hay
+que declararlos por separado.
 
-### 🎁 Mesa de regalos
-En `components/GiftTable.js`, reemplaza el botón disabled:
-```jsx
-<a href="[LINK_MESA_REGALOS]" target="_blank" className="...">
-  Ver mesa de regalos
-</a>
-```
-
-### 📞 Contacto (WhatsApp + Email)
-En `components/Closing.js`, edita las líneas:
-```
-href="https://wa.me/56XXXXXXXXX"   → número chileno real (ej: 56912345678)
-href="mailto:correo@ejemplo.com"   → email real
-```
+El dominio raíz (`https://tudominio.com/`) muestra una invitación genérica
+sin RSVP habilitado (no sabe a quién pertenece), invitando a usar el link
+personal.
 
 ---
 
-## 🌐 Subir a GitHub
+## 📊 Confirmaciones de asistencia → Google Sheets
 
-```bash
-# Desde la carpeta del proyecto
-git init
-git add .
-git commit -m "feat: sitio matrimonio Nicole & Luis"
-git branch -M main
-git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
-git push -u origin main
-```
+Las confirmaciones se envían mediante un **Google Apps Script Web App**, así
+que las credenciales de Google nunca quedan expuestas en la web — el
+frontend solo conoce la URL pública del Web App.
 
----
+1. Crea una Google Sheet nueva.
+2. Extensiones → Apps Script → pega el contenido de `google-apps-script/Code.gs`.
+3. Implementar → Nueva implementación → tipo "Aplicación web" (ejecutar como
+   tú, acceso "Cualquier usuario").
+4. Copia la URL `.../exec` que te entrega.
+5. En Vercel: Settings → Environment Variables → agrega
+   `NEXT_PUBLIC_APPS_SCRIPT_URL` con esa URL → Redeploy.
 
-## ▲ Desplegar en Vercel
-
-### Opción 1 — Desde el navegador (recomendado)
-1. Ve a [vercel.com](https://vercel.com) e inicia sesión con GitHub
-2. Haz clic en **"Add New Project"**
-3. Importa el repositorio
-4. Vercel detecta Next.js automáticamente — haz clic en **Deploy**
-5. ¡Listo! Obtienes una URL pública como `nicole-luis.vercel.app`
-
-### Opción 2 — CLI
-```bash
-npm i -g vercel
-vercel
-```
+Ver `.env.example` para el nombre exacto de la variable.
 
 ---
 
@@ -128,16 +76,16 @@ vercel
 
 | Color | Hex | Uso |
 |-------|-----|-----|
-| Fucsia | `#C93A8B` | Principal / acentos |
-| Coral | `#F26A4B` | Secundario / gradientes |
-| Marfil | `#F8F4EE` | Fondo principal |
-| Verde | `#3E5B3A` | Texto apoyo / hojas |
-| Dorado | `#D8A928` | Detalles premium |
+| Midnight Blue | `#273462` | Principal / CTA |
+| Smore Blue | `#045490` | Secundario |
+| Coastal | `#84B7CE` | Elementos suaves/decorativos |
+| Limoncello | `#FFF08C` | Acentos |
 
 ---
 
 ## 📝 Notas
 
-- El RSVP aún **no tiene backend**. Para conectarlo más adelante: Supabase o Resend.
-- El formulario muestra mensaje de éxito simulado.
-- La música **no se reproduce automáticamente** (requiere interacción del usuario).
+- No hay reproductor de música (se eliminó por completo).
+- No hay botón/enlace de correo (se eliminó por completo).
+- La sección "Foto final" usa `/public/images/foto-final.jpg` como
+  placeholder — súbela con ese nombre exacto cuando la tengas.

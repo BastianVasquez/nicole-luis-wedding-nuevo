@@ -5,16 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --fucsia: #E91E63;
-  --rosa-mexicano: #FF4F91;
-  --coral: #FF7043;
-  --mandarina: #FF8A3D;
-  --naranja: #F4511E;
-  --amarillo-dorado: #FFB300;
-  --dorado: #D4A017;
-  --verde-lima: #8BC34A;
-  --verde-hoja: #4F7D3A;
-  --ivory: #FFF9F2;
+  --midnight: #273462;
+  --smore: #045490;
+  --coastal: #84B7CE;
+  --limoncello: #FFF08C;
+  --ivory: #FBFAF6;
 }
 
 * { scroll-behavior: smooth; }
@@ -25,7 +20,7 @@ html {
 
 body {
   background-color: var(--ivory);
-  color: #2a2a2a;
+  color: #22283f;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
@@ -43,10 +38,10 @@ body {
   content: '';
   height: 1px;
   width: 80px;
-  background: linear-gradient(90deg, transparent, var(--dorado));
+  background: linear-gradient(90deg, transparent, var(--smore));
 }
 .divider-floral::after {
-  background: linear-gradient(90deg, var(--dorado), transparent);
+  background: linear-gradient(90deg, var(--smore), transparent);
 }
 
 /* Subtle grain texture overlay */
@@ -71,30 +66,30 @@ body {
   transform: translateY(0);
 }
 
-/* Gold border accent */
+/* Gold-equivalent border accent (now Limoncello) */
 .border-gold {
-  border-color: var(--dorado);
+  border-color: var(--limoncello);
 }
 
 /* Floral utility */
 .floral-accent {
-  color: var(--fucsia);
+  color: var(--midnight);
   opacity: 0.2;
 }
 
-/* Guest modal scrollbar */
+/* Guest modal / scroll areas */
 .overflow-y-auto {
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 160, 23, .65) rgba(212, 160, 23, .08);
+  scrollbar-color: rgba(4, 84, 144, .5) rgba(4, 84, 144, .08);
 }
 .overflow-y-auto::-webkit-scrollbar {
   width: 7px;
 }
 .overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(212, 160, 23, .08);
+  background: rgba(4, 84, 144, .08);
   border-radius: 999px;
 }
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(212, 160, 23, .65);
+  background: rgba(4, 84, 144, .5);
   border-radius: 999px;
 }

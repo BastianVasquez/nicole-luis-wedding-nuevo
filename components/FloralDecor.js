@@ -12,19 +12,19 @@ export default function FloralDecor() {
           <ellipse cx="128" cy="211" rx="12" ry="29" transform="rotate(48 128 211)" fill="#8BC34A"/>
         </g>
         <g transform="translate(26 56)">
-          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#F23B78"/>
-          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#FF6B4A"/>
-          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#E91E63"/>
-          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FF8A3D"/>
-          <circle cx="52" cy="53" r="14" fill="#F4B41A"/>
-          <circle cx="52" cy="53" r="5" fill="#D88900"/>
+          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#045490"/>
+          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#84B7CE"/>
+          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#273462"/>
+          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FFFFFF"/>
+          <circle cx="52" cy="53" r="14" fill="#FFF08C"/>
+          <circle cx="52" cy="53" r="5" fill="#F4D64A"/>
         </g>
         <g transform="translate(128 132) scale(.7)">
-          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#F23B78"/>
-          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#FF6B4A"/>
-          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#E91E63"/>
-          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FF8A3D"/>
-          <circle cx="52" cy="53" r="14" fill="#F4B41A"/>
+          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#273462"/>
+          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#84B7CE"/>
+          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#045490"/>
+          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FFFFFF"/>
+          <circle cx="52" cy="53" r="14" fill="#FFF08C"/>
         </g>
       </svg>
 
@@ -37,24 +37,24 @@ export default function FloralDecor() {
         <ellipse cx="272" cy="345" rx="13" ry="31" transform="rotate(62 272 345)" fill="#6FAE45"/>
 
         <g transform="translate(248 44)">
-          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#FF4F91"/>
-          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#FF7043"/>
-          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#E91E63"/>
-          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FFB300"/>
-          <circle cx="52" cy="53" r="14" fill="#FFD54F"/>
+          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#84B7CE"/>
+          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#045490"/>
+          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#273462"/>
+          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FFFFFF"/>
+          <circle cx="52" cy="53" r="14" fill="#FFF08C"/>
         </g>
         <g transform="translate(150 102) scale(.75)">
-          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#F23B78"/>
-          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#FF6B4A"/>
-          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#E91E63"/>
-          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FF8A3D"/>
-          <circle cx="52" cy="53" r="14" fill="#F4B41A"/>
+          <ellipse cx="58" cy="25" rx="23" ry="39" fill="#045490"/>
+          <ellipse cx="31" cy="48" rx="39" ry="23" transform="rotate(-12 31 48)" fill="#84B7CE"/>
+          <ellipse cx="73" cy="62" rx="38" ry="23" transform="rotate(12 73 62)" fill="#273462"/>
+          <ellipse cx="50" cy="82" rx="24" ry="39" fill="#FFFFFF"/>
+          <circle cx="52" cy="53" r="14" fill="#FFF08C"/>
         </g>
       </svg>
 
-      <div className="absolute top-[30%] right-[8%] w-2 h-2 rounded-full bg-[#D4A017] shadow-[0_0_0_5px_rgba(212,160,23,.08)]" />
-      <div className="absolute top-[55%] left-[9%] w-1.5 h-1.5 rounded-full bg-[#D4A017]" />
-      <div className="absolute top-[72%] right-[13%] w-2 h-2 rounded-full bg-[#D4A017]" />
+      <div className="absolute top-[30%] right-[8%] w-2 h-2 rounded-full bg-[#FFF08C] shadow-[0_0_0_5px_rgba(255,240,140,.25)]" />
+      <div className="absolute top-[55%] left-[9%] w-1.5 h-1.5 rounded-full bg-[#84B7CE]" />
+      <div className="absolute top-[72%] right-[13%] w-2 h-2 rounded-full bg-[#045490]" />
     </div>
   )
 }

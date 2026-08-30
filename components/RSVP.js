@@ -2,130 +2,201 @@
 import { useState } from 'react'
 import SectionWrapper from './SectionWrapper'
 
-export default function RSVP() {
-  const [form, setForm] = useState({ nombre: '', asistira: '', cantidad: '1', mensaje: '' })
+// guest = { slug, invitationName, guests: [...] } | null
+export default function RSVP({ guest }) {
+  const [selected, setSelected] = useState([])
+  const [comentarios, setComentarios] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const toggleGuest = (name) => {
+    setSelected((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
+    )
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setError('')
+
+    if (selected.length === 0) {
+      setError('Selecciona al menos una persona, o indica que no podrán asistir.')
+      return
+    }
+
     setLoading(true)
-    // Simula envío (sin backend por ahora)
-    await new Promise(r => setTimeout(r, 1200))
-    setLoading(false)
-    setSubmitted(true)
+    try {
+      const endpoint = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL
+      if (endpoint) {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors', // Apps Script Web Apps no siempre exponen CORS; no-cors evita bloqueos.
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            fecha: new Date().toISOString(),
+            slug: guest.slug,
+            invitacion: guest.invitationName,
+            cupos: guest.guests.length,
+            asistentes: selected,
+            todosLosNombres: guest.guests,
+            cantidadAsistentes: selected.length,
+            estado: 'Confirmado',
+            comentarios,
+          }),
+        })
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setError('Hubo un problema al enviar tu confirmación. Intenta nuevamente o escríbenos por WhatsApp.')
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const inputClass = "w-full px-4 py-3 rounded-xl border border-[#D8A928]/30 bg-white font-inter text-sm text-[#2a2a2a] placeholder-[#2a2a2a]/30 focus:outline-none focus:border-[#C93A8B]/50 focus:ring-2 focus:ring-[#C93A8B]/10 transition-all duration-200"
+  const handleNoAttend = async () => {
+    setLoading(true)
+    setError('')
+    try {
+      const endpoint = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL
+      if (endpoint) {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            fecha: new Date().toISOString(),
+            slug: guest.slug,
+            invitacion: guest.invitationName,
+            cupos: guest.guests.length,
+            asistentes: [],
+            todosLosNombres: guest.guests,
+            cantidadAsistentes: 0,
+            estado: 'No asistirá',
+            comentarios,
+          }),
+        })
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setError('Hubo un problema al enviar tu respuesta. Intenta nuevamente o escríbenos por WhatsApp.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <SectionWrapper className="py-20 px-6 bg-white">
       <div className="max-w-lg mx-auto">
         <div className="text-center mb-10">
-          <p className="font-inter text-xs tracking-[0.3em] uppercase text-[#3E5B3A] mb-2">Confirmar asistencia</p>
-          <h2 className="font-playfair text-3xl md:text-4xl text-[#2a2a2a] mb-2">RSVP</h2>
-          <p className="font-cormorant text-lg text-[#2a2a2a] opacity-60 italic">
-            Antes del 20 de mayo de 2026
+          <p className="font-inter text-xs tracking-[0.3em] uppercase text-[#045490] mb-2">N&amp;L</p>
+          <h2 className="font-playfair text-3xl md:text-4xl text-[#273462] mb-2">Confirmar Asistencia</h2>
+          <p className="font-cormorant text-lg text-[#22283f] opacity-60 italic">
+            Confirma tu asistencia antes del 01 de diciembre
           </p>
         </div>
 
-        {submitted ? (
-          <div className="text-center py-12 px-6 rounded-3xl" style={{ background: 'linear-gradient(135deg, #C93A8B08, #F26A4B08)' }}>
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ background: 'linear-gradient(135deg, #C93A8B, #F26A4B)' }}>
+        {!guest ? (
+          // Sin slug: no podemos identificar cupos ni nombres — pedimos usar el link personal.
+          <div className="text-center py-12 px-6 rounded-3xl" style={{ background: '#FBFAF6' }}>
+            <p className="font-cormorant text-xl text-[#22283f] italic mb-6">
+              Para confirmar tu asistencia, ingresa mediante el enlace personalizado que recibiste.
+            </p>
+            <a
+              href="https://wa.me/56961788810"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-inter text-sm tracking-[0.15em] uppercase shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+              style={{ background: '#045490' }}
+            >
+              Escribir a Nicole
+            </a>
+          </div>
+        ) : submitted ? (
+          <div className="text-center py-12 px-6 rounded-3xl" style={{ background: 'linear-gradient(135deg, #27346208, #04549008)' }}>
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ background: 'linear-gradient(135deg, #273462, #045490)' }}>
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
               </svg>
             </div>
-            <h3 className="font-playfair text-2xl text-[#2a2a2a] mb-2">¡Gracias, {form.nombre}!</h3>
-            <p className="font-cormorant text-lg text-[#2a2a2a] opacity-70 italic">
-              Hemos recibido tu respuesta. ¡Nos vemos pronto!
+            <h3 className="font-playfair text-2xl text-[#22283f] mb-2">¡Gracias por confirmar tu asistencia!</h3>
+            <p className="font-cormorant text-lg text-[#22283f] opacity-70 italic">
+              Nos hace mucha ilusión compartir este día contigo.
             </p>
             <div className="flex justify-center gap-2 mt-4">
-              <div className="h-1 w-8 rounded-full bg-[#C93A8B] opacity-40" />
-              <div className="h-1 w-4 rounded-full bg-[#D8A928] opacity-60" />
-              <div className="h-1 w-8 rounded-full bg-[#F26A4B] opacity-40" />
+              <div className="h-1 w-8 rounded-full bg-[#273462] opacity-40" />
+              <div className="h-1 w-4 rounded-full bg-[#FFF08C] opacity-90" />
+              <div className="h-1 w-8 rounded-full bg-[#045490] opacity-40" />
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Nombre */}
-            <div>
-              <label className="font-inter text-xs tracking-[0.15em] uppercase text-[#3E5B3A] mb-1.5 block">
-                Nombre completo
-              </label>
-              <input
-                name="nombre"
-                required
-                value={form.nombre}
-                onChange={handleChange}
-                placeholder="Tu nombre"
-                className={inputClass}
-              />
+            <div className="text-center mb-2">
+              <p className="font-playfair text-xl text-[#273462] mb-1">{guest.invitationName}</p>
+              <p className="font-inter text-xs text-[#22283f]/50 tracking-wide">
+                {guest.guests.length} {guest.guests.length === 1 ? 'cupo disponible' : 'cupos disponibles'}
+              </p>
             </div>
 
-            {/* Asistirá */}
             <div>
-              <label className="font-inter text-xs tracking-[0.15em] uppercase text-[#3E5B3A] mb-1.5 block">
-                ¿Asistirás?
+              <label className="font-inter text-xs tracking-[0.15em] uppercase text-[#045490] mb-2 block">
+                ¿Quiénes asistirán?
               </label>
-              <div className="grid grid-cols-2 gap-3">
-                {['Sí, asistiré', 'No podré asistir'].map((opt) => (
+              <div className="space-y-2">
+                {guest.guests.map((name) => (
                   <label
-                    key={opt}
-                    className={`relative flex items-center justify-center py-3 px-4 rounded-xl border cursor-pointer transition-all duration-200 font-inter text-sm ${
-                      form.asistira === opt
-                        ? 'border-[#C93A8B] bg-[#C93A8B]/5 text-[#C93A8B]'
-                        : 'border-[#D8A928]/30 text-[#2a2a2a]/60 hover:border-[#C93A8B]/30'
+                    key={name}
+                    className={`flex items-center gap-3 py-3 px-4 rounded-xl border cursor-pointer transition-all duration-200 font-inter text-sm ${
+                      selected.includes(name)
+                        ? 'border-[#273462] bg-[#273462]/5 text-[#273462]'
+                        : 'border-[#84B7CE]/40 text-[#22283f]/70 hover:border-[#045490]/40'
                     }`}
                   >
                     <input
-                      type="radio"
-                      name="asistira"
-                      value={opt}
-                      required
-                      onChange={handleChange}
-                      className="sr-only"
+                      type="checkbox"
+                      checked={selected.includes(name)}
+                      onChange={() => toggleGuest(name)}
+                      className="w-4 h-4 accent-[#273462]"
                     />
-                    {opt}
+                    {name}
                   </label>
                 ))}
               </div>
             </div>
 
-
-            {/* Mensaje */}
             <div>
-              <label className="font-inter text-xs tracking-[0.15em] uppercase text-[#3E5B3A] mb-1.5 block">
-                Mensaje (opcional)
+              <label className="font-inter text-xs tracking-[0.15em] uppercase text-[#045490] mb-1.5 block">
+                Comentarios (opcional)
               </label>
               <textarea
-                name="mensaje"
-                value={form.mensaje}
-                onChange={handleChange}
+                value={comentarios}
+                onChange={(e) => setComentarios(e.target.value)}
                 rows={3}
                 placeholder="Un mensaje para los novios..."
-                className={inputClass + ' resize-none'}
+                className="w-full px-4 py-3 rounded-xl border border-[#84B7CE]/40 bg-white font-inter text-sm text-[#22283f] placeholder-[#22283f]/30 focus:outline-none focus:border-[#273462]/60 focus:ring-2 focus:ring-[#273462]/10 transition-all duration-200 resize-none"
               />
             </div>
 
-            {/* Submit */}
+            {error && (
+              <p className="font-inter text-xs text-[#b3261e] text-center">{error}</p>
+            )}
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-xl font-inter text-sm tracking-[0.2em] uppercase text-white transition-all duration-300 disabled:opacity-70 hover:shadow-xl hover:shadow-[#C93A8B]/30 hover:-translate-y-0.5"
-              style={{ background: 'linear-gradient(135deg, #C93A8B, #F26A4B)' }}
+              className="w-full py-4 rounded-xl font-inter text-sm tracking-[0.2em] uppercase text-white transition-all duration-300 disabled:opacity-70 hover:shadow-xl hover:shadow-[#273462]/30 hover:-translate-y-0.5"
+              style={{ background: '#273462' }}
             >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                  </svg>
-                  Enviando...
-                </span>
-              ) : 'Confirmar asistencia'}
+              {loading ? 'Enviando...' : 'Confirmar asistencia'}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleNoAttend}
+              disabled={loading}
+              className="w-full py-3 rounded-xl font-inter text-xs tracking-[0.15em] uppercase text-[#22283f]/60 border border-[#84B7CE]/40 hover:bg-[#FBFAF6] transition-all duration-200 disabled:opacity-70"
+            >
+              No podremos asistir
             </button>
           </form>
         )}
