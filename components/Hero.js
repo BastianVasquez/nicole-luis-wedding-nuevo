@@ -17,9 +17,6 @@ export default function Hero({ guest }) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-start pt-4 md:pt-8 pb-20 overflow-hidden bg-[#F5F8FA]">
 
-      {/* Top line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#045490] to-transparent opacity-50" />
-
       {/* Main content */}
       <div
         ref={ref}
