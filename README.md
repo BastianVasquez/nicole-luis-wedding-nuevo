@@ -1,4 +1,4 @@
-# 💒 Nicole & Luis — Sitio Web de Matrimonio
+# 💒 Nicole & Luis — Sitio Web de Matrimonio 
 
 Invitación digital de matrimonio construida con **Next.js 14 + Tailwind CSS**.
 Boda: **27 de febrero de 2027**.
