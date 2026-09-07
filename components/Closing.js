@@ -5,16 +5,6 @@ export default function Closing() {
     <SectionWrapper className="py-24 px-6 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FFF08C]/70 to-transparent" />
-        <svg className="absolute -bottom-8 -left-8 w-56 opacity-10" viewBox="0 0 300 300" fill="none">
-          <circle cx="80" cy="220" r="60" fill="#273462"/>
-          <circle cx="150" cy="260" r="40" fill="#045490"/>
-          <circle cx="50" cy="280" r="30" fill="#84B7CE"/>
-        </svg>
-        <svg className="absolute -bottom-8 -right-8 w-56 opacity-10" viewBox="0 0 300 300" fill="none">
-          <circle cx="220" cy="220" r="60" fill="#045490"/>
-          <circle cx="160" cy="260" r="40" fill="#273462"/>
-          <circle cx="260" cy="270" r="30" fill="#FFF08C"/>
-        </svg>
       </div>
 
       <div className="max-w-xl mx-auto text-center relative z-10">

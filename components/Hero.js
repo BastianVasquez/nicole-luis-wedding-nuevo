@@ -17,27 +17,6 @@ export default function Hero({ guest }) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-start pt-16 md:pt-24 pb-20 overflow-hidden bg-[#F5F8FA]">
 
-      {/* Background floral decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-
-        {/* Top-left */}
-        <svg className="absolute -top-8 -left-8 w-64 md:w-80 opacity-25" viewBox="0 0 300 300" fill="none">
-          <circle cx="80" cy="80" r="40" fill="#045490" opacity="0.35"/>
-          <circle cx="130" cy="50" r="28" fill="#84B7CE" opacity="0.4"/>
-          <circle cx="50" cy="130" r="24" fill="#FFF08C" opacity="0.5"/>
-          <ellipse cx="95" cy="160" rx="16" ry="40" fill="#4F7D3A" opacity="0.2" transform="rotate(-20 95 160)"/>
-        </svg>
-
-        {/* Bottom-right */}
-        <svg className="absolute -bottom-8 -right-8 w-64 md:w-80 opacity-25" viewBox="0 0 300 300" fill="none">
-          <circle cx="220" cy="220" r="44" fill="#84B7CE" opacity="0.4"/>
-          <circle cx="170" cy="250" r="30" fill="#045490" opacity="0.35"/>
-          <circle cx="250" cy="170" r="22" fill="#FFF08C" opacity="0.5"/>
-          <ellipse cx="160" cy="200" rx="14" ry="38" fill="#4F7D3A" opacity="0.2" transform="rotate(20 160 200)"/>
-        </svg>
-
-      </div>
-
       {/* Top line */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#045490] to-transparent opacity-50" />
 
@@ -127,31 +106,26 @@ export default function Hero({ guest }) {
           </div>
         </div>
 
-        {/* BUTTON — CTA principal en Midnight Blue */}
+        {/* BUTTON — reemplazado por la imagen de los anillos */}
         <button
           onClick={scrollToContent}
-          className="group relative inline-flex items-center gap-3 px-10 py-4 font-inter text-sm tracking-[0.2em] uppercase text-white overflow-hidden rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-[#273462]/30 hover:-translate-y-0.5"
-          style={{ background: '#273462' }}
+          aria-label="Abrir invitación"
+          className="group inline-flex flex-col items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5"
         >
-          <span className="relative z-10">
-            Abrir invitación
-          </span>
-
+          <img
+            src="/images/anillos.png"
+            alt="Abrir invitación"
+            className="w-40 md:w-48 h-auto"
+          />
           <svg
-            className="w-4 h-4 relative z-10 transition-transform group-hover:translate-y-1"
+            className="w-4 h-4 text-[#273462] transition-transform group-hover:translate-y-1"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             viewBox="0 0 24 24"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 9l-7 7-7-7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
-
-          <div className="absolute inset-0 bg-[#045490] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </button>
 
       </div>
