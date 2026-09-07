@@ -29,7 +29,6 @@ export default function Closing() {
           </p>
         </div>
 
-        {/* Contacto WhatsApp */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           
             href="https://wa.me/56961788810"
