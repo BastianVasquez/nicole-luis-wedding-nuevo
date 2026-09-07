@@ -1,15 +1,13 @@
-// Franja floral decorativa (foto real) antes del cierre de la invitación.
-// mix-blend-mode "multiply" disuelve el fondo claro de la foto contra el
-// fondo crema de la web, para que no se note el recorte del archivo.
-export default function ClosingFloral() {
+// Franja floral decorativa (foto real, fondo transparente) que enmarca la
+// invitación: arriba de todo (dada vuelta 180°) y antes del cierre.
+export default function ClosingFloral({ flip = false }) {
   return (
-    <div className="w-full overflow-hidden pointer-events-none select-none bg-[#FBFAF6]">
+    <div className="w-full overflow-hidden pointer-events-none select-none">
       <img
         src="/images/floral-final.png"
         alt=""
         aria-hidden="true"
-        className="w-full h-auto"
-        style={{ mixBlendMode: 'multiply' }}
+        className={`w-full h-auto ${flip ? 'rotate-180' : ''}`}
       />
     </div>
   )
