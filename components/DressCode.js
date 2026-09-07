@@ -13,14 +13,11 @@ export default function DressCode() {
             <div className="absolute -bottom-16 -left-12 w-36 h-36 rounded-full bg-[#FFF08C]/30 blur-3xl" />
           </div>
 
-          {/* Icono elegante: pajarita / dress code */}
-          <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#273462]/8 mb-6">
-            <svg className="w-9 h-9 text-[#273462]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-label="Icono de código de vestimenta">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 8.5l6 3.5-6 3.5v-7z"/>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M20 8.5l-6 3.5 6 3.5v-7z"/>
-              <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/>
-            </svg>
-          </div>
+          <img
+            src="/images/dresscode-flowers.png"
+            alt="Vestido de novia y traje de novio entre flores"
+            className="relative mx-auto mb-6 w-full max-w-[220px] h-auto"
+          />
 
           <p className="font-playfair text-3xl md:text-4xl text-[#22283f] mb-4">Formal</p>
           <div className="h-px w-16 bg-[#FFF08C] mx-auto mb-4 opacity-90" />
