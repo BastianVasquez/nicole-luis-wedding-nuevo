@@ -15,7 +15,7 @@ export default function Hero({ guest }) {
   }
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-start pt-4 md:pt-8 pb-20 overflow-hidden bg-[#F5F8FA]">
+    <section className="relative min-h-screen flex flex-col items-center justify-start pt-2 md:pt-4 pb-20 overflow-hidden bg-[#FBFAF6]">
 
       {/* Main content */}
       <div
@@ -128,7 +128,7 @@ export default function Hero({ guest }) {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#F5F8FA] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FBFAF6] to-transparent pointer-events-none" />
 
     </section>
   )
