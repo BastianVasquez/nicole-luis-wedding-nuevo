@@ -43,8 +43,8 @@ export default function InvitationContent({ guest = null }) {
         <RSVP guest={guest} />
         <SectionFlourish />
         <FinalPhoto />
-        <ClosingFloral />
         <Closing />
+        <ClosingFloral />
       </div>
     </main>
   )
