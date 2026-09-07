@@ -11,7 +11,6 @@ import RSVP from './RSVP'
 import GuestWelcome from './GuestWelcome'
 import FinalPhoto from './FinalPhoto'
 import Closing from './Closing'
-import FloralDecor from './FloralDecor'
 import SectionFlourish from './SectionFlourish'
 import ClosingFloral from './ClosingFloral'
 
@@ -19,8 +18,8 @@ import ClosingFloral from './ClosingFloral'
 export default function InvitationContent({ guest = null }) {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#FBFAF6]">
-      <FloralDecor />
       <div className="relative z-10">
+        <ClosingFloral flip />
         <Hero guest={guest} />
         <SectionFlourish />
         <Countdown />
